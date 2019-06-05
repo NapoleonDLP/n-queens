@@ -125,6 +125,13 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      var board = this.attributes;
+
+      for (var row in board) {
+        if (this.hasColConflictAt(Number(row))) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
