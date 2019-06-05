@@ -87,7 +87,7 @@
           return piece === 1;
         }).length > 1; // fixme
         return result;
-      };
+      }
     },
 
     // test if any rows on this board contain conflicts
