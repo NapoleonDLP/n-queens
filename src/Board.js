@@ -82,6 +82,7 @@
       // this.hasAnyRowConflicts();
       var board = this.attributes;
       var row = board[rowIndex];
+      //added check here to avoide creating conflict for n property
       if (Array.isArray(row)) {
         var result = row.filter(function(piece) {
           return piece === 1;
@@ -95,7 +96,6 @@
       var board = this.attributes;
 
       for (var row in board) {
-        console.log(board[row]);
         //removed check for n. Take care of it in has row conflict
         // if (board[row] !== 'n') {
         if (this.hasRowConflictAt(Number(row))) {
@@ -113,7 +113,14 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var board = this.attributes;
+      var pieces = 0;
+      for (var key in board) {
+        if (board[key][colIndex] === 1) {
+          pieces++;
+        }
+      }
+      return pieces > 1; // fixme
     },
 
     // test if any columns on this board contain conflicts
