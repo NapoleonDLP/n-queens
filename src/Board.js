@@ -86,7 +86,7 @@
       if (Array.isArray(row)) {
         var result = row.filter(function(piece) {
           return piece === 1;
-        }).length > 1; // fixme
+        }).length > 1;
         return result;
       }
     },
@@ -103,7 +103,7 @@
         }
         // }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -120,19 +120,18 @@
           pieces++;
         }
       }
-      return pieces > 1; // fixme
+      return pieces > 1;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
       var board = this.attributes;
-
       for (var row in board) {
         if (this.hasColConflictAt(Number(row))) {
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -142,6 +141,23 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      //gives the board in array with nested arrays(rows)
+      var board = this.rows();
+      var count = 0;
+
+      var currentIndex = majorDiagonalColumnIndexAtFirstRow;
+
+      for (var i = 0; i < board.length; i++) {
+        var row = board[i];
+        if (currentIndex > -1 && row[currentIndex] === 1) {
+          count++;
+        }
+        if (count > 1) {
+          return true;
+        }
+        currentIndex++;
+      }
+
       return false; // fixme
     },
 
