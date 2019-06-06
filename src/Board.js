@@ -144,17 +144,20 @@
       //gives the board in array with nested arrays(rows)
       var board = this.rows();
       var count = 0;
+      var row = arguments[1];
 
       var currentIndex = majorDiagonalColumnIndexAtFirstRow;
 
-      for (var i = 0; i < board.length; i++) {
+      for (var i = row; i < board.length; i++) {
         var row = board[i];
         if (currentIndex > -1 && row[currentIndex] === 1) {
           count++;
         }
+
         if (count > 1) {
           return true;
         }
+
         currentIndex++;
       }
 
@@ -163,6 +166,17 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      var board = this.rows();
+
+      for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board[i].length; j++) {
+          if (board[i][j] === 1) {
+            if (this.hasMajorDiagonalConflictAt(j, i)) {
+              return true;
+            }
+          }
+        }
+      }
       return false; // fixme
     },
 
